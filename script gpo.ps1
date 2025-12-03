@@ -22,7 +22,7 @@ function New-LogonScript {
     param([Parameter(Mandatory)]$Gpo)
 
     $domain = (Get-ADDomain).DNSRoot
-    $gpoId  = "{0}" -f $Gpo.Id   # <<== VERSION DEMANDÉE
+    $gpoId  = "{0}" -f $Gpo.Id 
 
     $logonPath = "\\$domain\SYSVOL\$domain\Policies\$gpoId\User\Scripts\Logon"
     New-Item -Path $logonPath -ItemType Directory -Force | Out-Null
@@ -65,7 +65,7 @@ function Enable-ForceLogoff {
     param([Parameter(Mandatory)]$Gpo)
 
     $domain = (Get-ADDomain).DNSRoot
-    $gpoId  = "{0}" -f $Gpo.Id   # <<== FORMAT DEMANDÉ
+    $gpoId  = "{0}" -f $Gpo.Id
 
     $path = "\\$domain\SYSVOL\$domain\Policies\$gpoId\Machine\Microsoft\Windows NT\SecEdit"
     New-Item -Path $path -ItemType Directory -Force | Out-Null
@@ -157,5 +157,6 @@ $EleveSchedule = @{
 Apply-LogonHoursToGroup "MS-Administration" $AdminSchedule
 Apply-LogonHoursToGroup "MS-Profs" $ProfSchedule
 Apply-LogonHoursToGroup "MS-Eleves" $EleveSchedule
+
 
 Write-Host "==> TOUT EST APPLIQUÉ."
